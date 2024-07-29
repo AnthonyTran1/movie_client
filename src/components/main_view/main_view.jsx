@@ -1,66 +1,79 @@
 import { useState } from "react";
-import { BookCard } from "../book_card/book_card";
-import { BookView } from "../book_view/book_view";
+import { MovieCard } from "../movie_card/movie_card";
+import { MovieView } from "../movie_view/movie_view";
 
 export const MainView = () => {
-  const [books, setBooks] = useState([
+  const [movies, setMovies] = useState([
     {
       id: 1,
-      title: "Eloquent JavaScript",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
-      author: "Marijn Haverbeke",
+      title: "John Wick",
+      image: "https://m.media-amazon.com/images/I/7169P9ipAGL._AC_SL1499_.jpg",
+      genre: "Thriller",
+      director: "Chad Stahelski",
+      description:
+        "An ex-hitman comes out of retirement to track down the gangsters who killed his dog and stole his car.",
     },
     {
       id: 2,
-      title: "Mastering JavaScript Functional Programming",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "Federico Kereki",
+      title: "John Wick: Chapter 2",
+      image: "https://m.media-amazon.com/images/I/61TdePQT4aL._AC_SL1500_.jpg",
+      genre: "Thriller",
+      director: "Chad Stahelski",
+      description:
+        "After returning to the criminal underworld to repay a debt, John Wick discovers that a large bounty has been put on his life.",
     },
     {
       id: 3,
-      title: "JavaScript: The Good Parts",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
-      author: "Douglas Crockford",
+      title: "John Wick 3 - Parabellum",
+      image: "https://m.media-amazon.com/images/I/61tVMGdM1hL._AC_SL1500_.jpg",
+      genre: "Thriller",
+      director: "Chad Stahelski",
+      description:
+        "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
     },
     {
       id: 4,
-      title: "JavaScript: The Definitive Guide",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "David Flanagan",
+      title: "Harry Potter and the Sorcerers Stone",
+      image: "https://m.media-amazon.com/images/I/8102IRfOCBL._AC_SL1500_.jpg",
+      genre: "Fantasy",
+      director: "Chris Columbus",
+      description:
+        "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
     },
     {
       id: 5,
-      title: "The Road to React",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
-      author: "Robin Wieruch",
+      title: "Harry Potter and the Chamber of Secrets",
+      image: "https://m.media-amazon.com/images/I/71FL9FvRWnL._AC_SL1500_.jpg",
+      genre: "Fantasy",
+      director: "Chris Columbus",
+      description:
+        "Harry Potter lives his second year at Hogwarts with Ron and Hermione when a message on the wall announces that the legendary Chamber of Secrets has been opened. The trio soon realize that, to save the school, it will take a lot of courage.",
     },
   ]);
 
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-  if (selectedBook) {
+  if (selectedMovie) {
     return (
-      <BookView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => setSelectedMovie(null)}
+      />
     );
   }
 
-  if (books.length === 0) {
+  if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
 
   return (
     <div>
-      {books.map((book) => (
-        <BookCard
-          key={book.id}
-          book={book}
-          onBookClick={(newSelectedBook) => {
-            setSelectedBook(newSelectedBook);
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          onMovieClick={(newSelectedMovie) => {
+            setSelectedMovie(newSelectedMovie);
           }}
         />
       ))}
