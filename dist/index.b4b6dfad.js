@@ -27379,62 +27379,36 @@ var _movieView = require("../movie_view/movie_view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            id: 1,
-            title: "John Wick",
-            image: "https://m.media-amazon.com/images/I/7169P9ipAGL._AC_SL1499_.jpg",
-            genre: "Thriller",
-            director: "Chad Stahelski",
-            description: "An ex-hitman comes out of retirement to track down the gangsters who killed his dog and stole his car."
-        },
-        {
-            id: 2,
-            title: "John Wick: Chapter 2",
-            image: "https://m.media-amazon.com/images/I/61TdePQT4aL._AC_SL1500_.jpg",
-            genre: "Thriller",
-            director: "Chad Stahelski",
-            description: "After returning to the criminal underworld to repay a debt, John Wick discovers that a large bounty has been put on his life."
-        },
-        {
-            id: 3,
-            title: "John Wick 3 - Parabellum",
-            image: "https://m.media-amazon.com/images/I/61tVMGdM1hL._AC_SL1500_.jpg",
-            genre: "Thriller",
-            director: "Chad Stahelski",
-            description: "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere."
-        },
-        {
-            id: 4,
-            title: "Harry Potter and the Sorcerers Stone",
-            image: "https://m.media-amazon.com/images/I/8102IRfOCBL._AC_SL1500_.jpg",
-            genre: "Fantasy",
-            director: "Chris Columbus",
-            description: "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world."
-        },
-        {
-            id: 5,
-            title: "Harry Potter and the Chamber of Secrets",
-            image: "https://m.media-amazon.com/images/I/71FL9FvRWnL._AC_SL1500_.jpg",
-            genre: "Fantasy",
-            director: "Chris Columbus",
-            description: "Harry Potter lives his second year at Hogwarts with Ron and Hermione when a message on the wall announces that the legendary Chamber of Secrets has been opened. The trio soon realize that, to save the school, it will take a lot of courage."
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetch("https://movies-flix-aada9cec6615.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.map((doc)=>{
+                return {
+                    id: doc._id,
+                    title: doc.Title,
+                    image: doc.ImagePath,
+                    director: doc.Director.Name,
+                    description: doc.Description,
+                    genre: doc.Genre.Name
+                };
+            });
+            setMovies(moviesFromApi);
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main_view/main_view.jsx",
-        lineNumber: 58,
+        lineNumber: 31,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main_view/main_view.jsx",
-        lineNumber: 66,
+        lineNumber: 39,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27445,16 +27419,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main_view/main_view.jsx",
-                lineNumber: 72,
+                lineNumber: 45,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main_view/main_view.jsx",
-        lineNumber: 70,
+        lineNumber: 43,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "bqhyFcbbHUy+eZ++TCbr7x/hlzc=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28303,7 +28277,8 @@ const MovieView = ({ movie, onBackClick })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: movie.image
+                    src: movie.image,
+                    alt: "movie_image"
                 }, void 0, false, {
                     fileName: "src/components/movie_view/movie_view.jsx",
                     lineNumber: 5,
