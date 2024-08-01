@@ -28393,8 +28393,20 @@ const MovieView = ({ movie, onBackClick })=>{
         lineNumber: 5,
         columnNumber: 5
     }, undefined);
+//Here is where we define all the props constraints for the MovieCard
 };
 _c = MovieView;
+//Here is where we define all the props constraints for the MovieCard
+MovieView.propTypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        image: (0, _propTypesDefault.default).string.isRequired,
+        genre: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).string.isRequired,
+        description: (0, _propTypesDefault.default).string
+    }).isRequired,
+    onBackClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieView");
 
