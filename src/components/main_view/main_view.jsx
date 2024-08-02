@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie_card/movie_card";
 import { MovieView } from "../movie_view/movie_view";
+import { LoginView } from "../login_view/login_view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
-
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch("https://movies-flix-aada9cec6615.herokuapp.com/movies")
@@ -25,6 +26,10 @@ export const MainView = () => {
         setMovies(moviesFromApi);
       });
   }, []);
+
+  if (!user) {
+    return <LoginView onLoggedIn={(user) => setUser(user)} />;
+  }
 
   if (selectedMovie) {
     return (
@@ -50,6 +55,13 @@ export const MainView = () => {
           }}
         />
       ))}
+      <button
+        onClick={() => {
+          setUser(null);
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 };
