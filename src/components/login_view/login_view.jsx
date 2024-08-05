@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +13,7 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     fetch("https://movies-flix-aada9cec6615.herokuapp.com/login", {
+      mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json",

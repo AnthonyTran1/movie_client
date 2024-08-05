@@ -28488,6 +28488,7 @@ const LoginView = ({ onLoggedIn })=>{
             Password: password
         };
         fetch("https://movies-flix-aada9cec6615.herokuapp.com/login", {
+            mode: "no-cors",
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28598,7 +28599,7 @@ const SignupView = ()=>{
             Birthday: birthday
         };
         //will eventually replace SIGNUP_URL when made
-        fetch("SIGNUP_URL", {
+        fetch("https://movies-flix-aada9cec6615.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
