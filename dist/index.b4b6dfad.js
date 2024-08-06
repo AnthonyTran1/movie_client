@@ -28488,7 +28488,6 @@ const LoginView = ({ onLoggedIn })=>{
             Password: password
         };
         fetch("https://movies-flix-aada9cec6615.herokuapp.com/login", {
-            mode: "no-cors",
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28518,13 +28517,13 @@ const LoginView = ({ onLoggedIn })=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login_view/login_view.jsx",
-                        lineNumber: 43,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login_view/login_view.jsx",
-                lineNumber: 41,
+                lineNumber: 40,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28537,13 +28536,13 @@ const LoginView = ({ onLoggedIn })=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login_view/login_view.jsx",
-                        lineNumber: 52,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login_view/login_view.jsx",
-                lineNumber: 50,
+                lineNumber: 49,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28551,13 +28550,13 @@ const LoginView = ({ onLoggedIn })=>{
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/login_view/login_view.jsx",
-                lineNumber: 59,
+                lineNumber: 58,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/login_view/login_view.jsx",
-        lineNumber: 40,
+        lineNumber: 39,
         columnNumber: 5
     }, undefined);
 };

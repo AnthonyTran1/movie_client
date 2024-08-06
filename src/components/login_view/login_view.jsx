@@ -13,7 +13,6 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     fetch("https://movies-flix-aada9cec6615.herokuapp.com/login", {
-      mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
