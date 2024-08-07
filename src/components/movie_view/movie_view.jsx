@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
+import Col from "react-bootstrap/Col";
 import "./movie_view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <div>
+    <Col md={8}>
       <div>
         <img src={movie.image} alt="movie_image" />
       </div>
@@ -30,7 +31,7 @@ export const MovieView = ({ movie, onBackClick }) => {
       >
         Back
       </button>
-    </div>
+    </Col>
   );
   //Here is where we define all the props constraints for the MovieCard
 };
