@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./movie_view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
@@ -22,7 +23,13 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>Description: </span>
         <span>{movie.description}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <button
+        onClick={onBackClick}
+        className="back-button"
+        style={{ cursor: "pointer" }}
+      >
+        Back
+      </button>
     </div>
   );
   //Here is where we define all the props constraints for the MovieCard
