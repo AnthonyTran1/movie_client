@@ -3,6 +3,7 @@ import { MovieCard } from "../movie_card/movie_card";
 import { MovieView } from "../movie_view/movie_view";
 import { LoginView } from "../login_view/login_view";
 import { SignupView } from "../signup_view/signup_view";
+import { ProfileView } from "../profile_view/profile_view";
 import { NavigationBar } from "../navigation_bar/navigation_bar";
 
 import Row from "react-bootstrap/Row";
@@ -26,6 +27,7 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         const moviesFromApi = data.map((doc) => {
+          console.log("this is data from mainview" + data);
           return {
             id: doc._id,
             title: doc.Title,
@@ -37,7 +39,7 @@ export const MainView = () => {
         });
 
         setMovies(moviesFromApi);
-        console.log(data);
+        // console.log("this is stored token: " + storedToken);
       });
   }, [token]);
 
@@ -118,6 +120,20 @@ export const MainView = () => {
                       </Col>
                     ))}
                   </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col md={8}>
+                    <ProfileView user={user} token={storedToken} />
+                  </Col>
                 )}
               </>
             }

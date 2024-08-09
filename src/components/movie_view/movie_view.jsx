@@ -6,11 +6,9 @@ import "./movie_view.scss";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
-  const movie = movies.find((b) => b.id === movieId);
+  const movie = movies.find((m) => m.id === movieId);
   return (
-    // <Col md={8}>
-    console.log("this is movie Id: " + movieId),
-    (
+    <Col md={8}>
       <div>
         <div>
           <img src={movie.image} alt="movie_image" />
@@ -35,8 +33,7 @@ export const MovieView = ({ movies }) => {
           <button className="back-button">Back</button>
         </Link>
       </div>
-    )
-    // <Col/>
+    </Col>
   );
   //Here is where we define all the props constraints for the MovieCard
 };
