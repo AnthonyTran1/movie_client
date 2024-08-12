@@ -4,9 +4,42 @@ import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import "./movie_view.scss";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, user, token }) => {
   const { movieId } = useParams();
   const movie = movies.find((m) => m.id === movieId);
+
+  const onClickAddFavorite = () => {
+    fetch(
+      `https://movies-flix-aada9cec6615.herokuapp.com/users/${user.Username}/movies/${movieId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        method: "POST",
+      }
+    ).then((response) => {
+      if (response.ok) {
+        alert(`Successfully added ${movie.title} to favorites!`);
+      } else {
+        alert(`${movie.title} is already in favorites!`);
+      }
+    });
+  };
+
+  const onClickRemoveFavorite = () => {
+    fetch(
+      `https://movies-flix-aada9cec6615.herokuapp.com/users/${user.Username}/movies/${movieId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        method: "DELETE",
+      }
+    ).then((response) => {
+      if (response.ok) {
+        alert(`Successfully removed ${movie.title} from favorites!`);
+      } else {
+        alert(`${movie.title} is not in favorites!`);
+      }
+    });
+  };
+
   return (
     <Col md={8}>
       <div>
@@ -29,6 +62,16 @@ export const MovieView = ({ movies }) => {
           <span>Description: </span>
           <span>{movie.description}</span>
         </div>
+        <Link>
+          <button className="fav-button" onClick={onClickAddFavorite}>
+            Add Favorite
+          </button>
+        </Link>
+        <Link>
+          <button className="unfav-button" onClick={onClickRemoveFavorite}>
+            Remove Favorite
+          </button>
+        </Link>
         <Link to={"/"}>
           <button className="back-button">Back</button>
         </Link>

@@ -27,7 +27,6 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         const moviesFromApi = data.map((doc) => {
-          console.log("this is data from mainview" + data);
           return {
             id: doc._id,
             title: doc.Title,
@@ -39,7 +38,6 @@ export const MainView = () => {
         });
 
         setMovies(moviesFromApi);
-        // console.log("this is stored token: " + storedToken);
       });
   }, [token]);
 
@@ -98,7 +96,7 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} />
+                    <MovieView movies={movies} user={user} token={token} />
                   </Col>
                 )}
               </>
@@ -132,7 +130,11 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={8}>
-                    <ProfileView user={user} token={storedToken} />
+                    <ProfileView
+                      user={user}
+                      token={storedToken}
+                      movies={movies}
+                    />
                   </Col>
                 )}
               </>

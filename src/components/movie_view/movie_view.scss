@@ -5,6 +5,23 @@
   border: none;
   border-radius: 4px;
 }
+
+.fav-button {
+  padding: 4px 12px 4px 12px;
+  color: whitesmoke;
+  background-color: rgb(141, 241, 75);
+  border: none;
+  border-radius: 4px;
+}
+
+.unfav-button {
+  padding: 4px 12px 4px 12px;
+  color: whitesmoke;
+  background-color: rgb(223, 31, 31);
+  border: none;
+  border-radius: 4px;
+}
+
 img {
   width: 100%;
 }

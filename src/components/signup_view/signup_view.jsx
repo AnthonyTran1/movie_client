@@ -18,7 +18,6 @@ export const SignupView = () => {
       Birthday: birthday,
     };
 
-    //will eventually replace SIGNUP_URL when made
     fetch("https://movies-flix-aada9cec6615.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
