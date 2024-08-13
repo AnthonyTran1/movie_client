@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { MovieCard } from "../movie_card/movie_card";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
+import { Row } from "react-bootstrap";
 import "./profile_view.scss";
+import { LoginView } from "../login_view/login_view";
 
-export const ProfileView = ({ user, token, movies }) => {
+export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
   const [usernameUpdate, setUsernameUpdate] = useState("");
   const [passwordUpdate, setPasswordUpdate] = useState("");
   const [emailUpdate, setEmailUpdate] = useState("");
@@ -21,14 +24,16 @@ export const ProfileView = ({ user, token, movies }) => {
     favoriteMovies: [],
   });
 
-  // let myFavoriteMovies = movies.filter(
-  //   (m) => m._id === user.FavoriteMovies.map()
-  // );
-  // console.log("fav movies: " + myFavoriteMovies);
-  console.log("userdata movies: " + userData.favoriteMovies);
-  console.log("userdata datatype: " + typeof userData.favoriteMovies);
+  // setMyFavMovies(movies.filter((m) => m._id === user.FavoriteMovies.forEach()));
+  // console.log("fav movies: " + myFavMovies);
+  console.log(user);
+  console.log(token);
 
   useEffect(() => {
+    if (!token) {
+      alert("no token");
+      return LoginView;
+    }
     fetch(
       `https://movies-flix-aada9cec6615.herokuapp.com/users/${user.Username}`,
       {
@@ -46,6 +51,19 @@ export const ProfileView = ({ user, token, movies }) => {
         })
       );
   }, [token]);
+
+  useEffect(() => {
+    let myFavMoviesArray = movies.filter((m) => {
+      for (let favM of userData.favoriteMovies) {
+        if (favM === m.id) {
+          // console.log("hit in loop: " + favM, m.id);
+          return true;
+        }
+      }
+      return false;
+    });
+    setMyFavMovies(myFavMoviesArray);
+  }, [userData.favoriteMovies]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -78,6 +96,7 @@ export const ProfileView = ({ user, token, movies }) => {
   };
 
   const onClickDeregister = () => {
+    alert;
     fetch(
       `https://movies-flix-aada9cec6615.herokuapp.com/users/${user.Username}`,
       {
@@ -119,12 +138,14 @@ export const ProfileView = ({ user, token, movies }) => {
         </div>
         <div>
           <span>Favorite Movies: </span>
-          <span>{userData.favoriteMovies}</span>
         </div>
-        {/* <div>
-          <span>Favorite Movies from users: </span>
-          <span>{favoriteMoviesList}</span>
-        </div> */}
+      </div>
+      <div className="favMovieList">
+        {myFavMovies.map((movie) => (
+          <Col className="favCards" key={movie.id} md={4}>
+            <MovieCard movie={movie} />
+          </Col>
+        ))}
       </div>
       <span>Update User Information Below:</span>
       <Form onSubmit={handleSubmit}>
@@ -173,8 +194,10 @@ export const ProfileView = ({ user, token, movies }) => {
         <div>CAUTION: DANGER ZONE!!! </div>
         <span>Click below ONLY if you want to deregister your account! </span>
       </div>
-      <Link>
-        <button className="deregister-button">Deregister Account</button>
+      <Link to={"/"}>
+        <button className="deregister-button" onClick={onClickDeregister}>
+          Deregister Account
+        </button>
       </Link>
     </Col>
   );

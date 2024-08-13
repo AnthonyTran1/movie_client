@@ -13227,4 +13227,12 @@ img {
   border-radius: 4px;
   padding: 4px 12px;
 }
+
+.favMovieList {
+  display: flex;
+}
+
+.favCards {
+  margin: 10px;
+}
 /*# sourceMappingURL=index.2212206d.css.map */
