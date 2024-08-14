@@ -108,6 +108,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
         alert(
           `Successfully deregistered ${user.Username}! Thank you for using my App!`
         );
+        onLoggedOut();
       } else {
         alert(`ERROR: ${user.Username} was not deleted!`);
       }
