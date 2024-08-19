@@ -5,7 +5,8 @@ import { LoginView } from "../login_view/login_view";
 import { SignupView } from "../signup_view/signup_view";
 import { ProfileView } from "../profile_view/profile_view";
 import { NavigationBar } from "../navigation_bar/navigation_bar";
-
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -16,6 +17,8 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
+  const [filteredMovieName, setFilteredMovieName] = useState();
+  const [masterList, setMasterList] = useState();
 
   useEffect(() => {
     if (!token) {
@@ -38,8 +41,17 @@ export const MainView = () => {
         });
 
         setMovies(moviesFromApi);
+        setMasterList(moviesFromApi);
       });
   }, [token]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const thisFilterMovie = masterList.filter((m) =>
+      m.title.toLowerCase().includes(filteredMovieName.toLowerCase())
+    );
+    setMovies(thisFilterMovie);
+  };
 
   return (
     <BrowserRouter>
@@ -49,6 +61,10 @@ export const MainView = () => {
           setUser(null);
           setToken(null);
           localStorage.clear();
+        }}
+        onHomePress={() => {
+          setMovies(masterList);
+          setFilteredMovieName("");
         }}
       />
       <Row className="justify-content-md-center">
@@ -112,6 +128,20 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group controlId="formMovie">
+                        <Form.Label>Search by Movie Name :</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={filteredMovieName}
+                          onChange={(e) => setFilteredMovieName(e.target.value)}
+                          required
+                        />
+                      </Form.Group>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                    </Form>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
                         <MovieCard movie={movie} />

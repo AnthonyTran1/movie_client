@@ -24,6 +24,7 @@ Main View
 - Ability to select a movie for more details
 - Ability to log out
 - Ability to navigate to Profile view
+- Filtering the list of movies with a “search” feature
 
 Single Movie View
 

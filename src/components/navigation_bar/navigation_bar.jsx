@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onHomePress }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -23,7 +23,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             )}
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
+                <Nav.Link as={Link} to="/" onClick={onHomePress}>
                   Home
                 </Nav.Link>
                 <Nav.Link as={Link} to="/profile">

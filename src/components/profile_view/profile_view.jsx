@@ -24,11 +24,6 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     favoriteMovies: [],
   });
 
-  // setMyFavMovies(movies.filter((m) => m._id === user.FavoriteMovies.forEach()));
-  // console.log("fav movies: " + myFavMovies);
-  console.log(user);
-  console.log(token);
-
   useEffect(() => {
     if (!token) {
       alert("no token");
@@ -56,7 +51,6 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     let myFavMoviesArray = movies.filter((m) => {
       for (let favM of userData.favoriteMovies) {
         if (favM === m.id) {
-          // console.log("hit in loop: " + favM, m.id);
           return true;
         }
       }
