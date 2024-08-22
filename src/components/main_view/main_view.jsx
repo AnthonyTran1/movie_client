@@ -18,7 +18,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [filteredMovieName, setFilteredMovieName] = useState();
-  const [masterList, setMasterList] = useState();
+  const [masterList, setMasterList] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -40,8 +40,8 @@ export const MainView = () => {
           };
         });
 
-        setMovies(moviesFromApi);
         setMasterList(moviesFromApi);
+        setMovies(moviesFromApi);
       });
   }, [token]);
 
@@ -51,6 +51,11 @@ export const MainView = () => {
       m.title.toLowerCase().includes(filteredMovieName.toLowerCase())
     );
     setMovies(thisFilterMovie);
+  };
+
+  const handleClear = (event) => {
+    event.preventDefault();
+    setMovies(masterList);
   };
 
   return (
@@ -92,7 +97,7 @@ export const MainView = () => {
                 ) : (
                   <Col md={5}>
                     <LoginView
-                      onLoggedIn={(user) => {
+                      onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
                       }}
@@ -125,7 +130,28 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <>
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group controlId="formMovie">
+                        <Form.Label>Search by Movie Name :</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={filteredMovieName}
+                          onChange={(e) => setFilteredMovieName(e.target.value)}
+                          required
+                        />
+                      </Form.Group>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                    </Form>
+                    <Form onSubmit={handleClear}>
+                      <Button variant="secondary" type="clear">
+                        Clear Filter
+                      </Button>
+                    </Form>
+                    <Col>The list is empty!</Col>
+                  </>
                 ) : (
                   <>
                     <Form onSubmit={handleSubmit}>
@@ -140,6 +166,11 @@ export const MainView = () => {
                       </Form.Group>
                       <Button variant="primary" type="submit">
                         Submit
+                      </Button>
+                    </Form>
+                    <Form onSubmit={handleClear}>
+                      <Button variant="secondary" type="clear">
+                        Clear Filter
                       </Button>
                     </Form>
                     {movies.map((movie) => (
@@ -163,7 +194,7 @@ export const MainView = () => {
                     <ProfileView
                       user={user}
                       token={storedToken}
-                      movies={movies}
+                      movies={masterList}
                       onLoggedOut={() => {
                         setUser(null);
                         setToken(null);
